@@ -1,41 +1,60 @@
-[{
-		"repo_name": "dpdk-next-eventdev",
-		"repo_address": "git://dpdk.org/next/dpdk-next-eventdev",
-		"priority" : 3,
-		"subject": [
-			"eventdev",
-			"event/",
-			"app/eventdev"
-		],
-		"paths": [
-			"lib/librte_eventdev/",
-            "lib/librte_eal/common/"
-		]
-	},
-	{
-		"repo_name": "dpdk-next-net",
-		"repo_address": "git://dpdk.org/next/dpdk-next-net",
-		"priority" : 0,
-		"subject": [
-			"net/ixgbe",
-			"net/bnxt",
-			"net/i40e"
-		],
-		"paths": [
-			"/drivers/net/ixgbe/",
-            "lib/librte_eal/common/",
-			"/lib/librte_ether/"
-		]
-	},
-	{
-		"repo_name": "dpdk-next-crypto",
-		"repo_address": "git://dpdk.org/next/dpdk-next-crypto",
-		"priority" : 2,
-		"subject": [
-			"cryptodev:"
-		],
-		"paths": [
-			"lib/librte_cryptodev/"
-		]
-	}
-]
+{
+	"default" : {
+			"repo_name": "dpdk-next-net",
+			"repo_address": "git://dpdk.org/next/dpdk-next-net",
+			"priority" : 0,
+			"subject": [
+				"net/ixgbe",
+				"net/bnxt",
+				"net/i40e"
+			],
+			"paths": [
+				"/drivers/net/ixgbe/",
+				"lib/librte_eal/common/",
+				"/lib/librte_ether/"
+			]
+		},
+	"repos" : [
+		{
+			"repo_name": "dpdk-next-eventdev",
+			"repo_address": "git://dpdk.org/next/dpdk-next-eventdev",
+			"priority" : 3,
+			"subject": [
+				"eventdev",
+				"event/",
+				"app/eventdev"
+			],
+			"paths": [
+				"lib/librte_eventdev/",
+				"lib/librte_eal/common/"
+			]
+		},
+		{
+			"repo_name": "dpdk-next-net",
+			"repo_address": "git://dpdk.org/next/dpdk-next-net",
+			"priority" : 0,
+			"subject": [
+				"net/ixgbe",
+				"net/bnxt",
+				"net/i40e"
+			],
+			"paths": [
+				"/drivers/net/ixgbe/",
+				"lib/librte_eal/common/",
+				"/lib/librte_ether/"
+			]
+		},
+		{
+			"repo_name": "dpdk-next-crypto",
+			"repo_address": "git://dpdk.org/next/dpdk-next-crypto",
+			"priority" : 2,
+			"subject": [
+				"cryptodev:"
+			],
+			"paths": [
+				"lib/librte_cryptodev/"
+			]
+		}
+	]
+}
+
