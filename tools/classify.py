@@ -11,7 +11,7 @@ class Classify(object):
         files = patch.get_files()
 
         # get the list of repositories
-        for rep in self.rules:
+        for rep in self.rules['repos']:
             found = False
             # run on all title rules
             for rule in rep['subject']:
@@ -28,9 +28,20 @@ class Classify(object):
                         # print("found rep based on file = " + rep['repo_name'])
             if found:
                 obj = {};
-                obj['rep'] = rep['repo_name']
+                obj['rep_name'] = rep['repo_name']
+                obj['repo_address'] = rep['repo_address']
                 obj['priority'] = rep['priority']
                 patch.set_repository(obj)
-
-        newlist = sorted(patch.get_repositorys(), key=lambda x: x['priority'], reverse=False)
+        found_repos = patch.get_repositorys();
+        if (len(found_repos)==0):
+            obj = {}
+            rep  = self.rules['default']
+            obj['rep_name'] = rep['repo_name']
+            obj['repo_address'] = rep['repo_address']
+            obj['priority'] = rep['priority']
+            patch.set_repository(obj)
+            newlist = []
+            newlist.append(obj)
+        else:
+            newlist = sorted(patch.get_repositorys(), key=lambda x: x['priority'], reverse=False)
         patch.set_repository_list(newlist)

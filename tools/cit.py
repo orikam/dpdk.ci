@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import patch_list
 import argparse
+import git_control
 
 # id for testing
 #id 27075 next-net
@@ -33,6 +34,8 @@ import argparse
 # plist.pull_patch_list(26986,100)
 
 def main():
+    # git_control.clone('https://github.com/jlowin/git-sync.git', '~/Dev/Temp/git')
+    git_control.reset('/Users/orikam/Dev/Temp/git')
     parser = argparse.ArgumentParser()
     parser.add_argument("start", type=int, help="the first patch id to get")
     parser.add_argument("number", type=int, help="the number of patches to analyze")

@@ -98,6 +98,6 @@ class Patch(object):
         print ('Reposetories: ')
         if len(self.get_repositorys()) > 0:
             for r in self.get_repositorys():
-                print (r['rep'] +',' + str(r['priority']))
+                print (r['rep_name'] +',' + str(r['priority']))
         else:
             print ('no repository found')
