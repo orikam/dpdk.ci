@@ -1,5 +1,7 @@
 import pwclass
 import subprocess
+import repo_constants
+
 
 class Patch(object):
 
@@ -56,7 +58,7 @@ class Patch(object):
         p = subprocess.Popen('rm ' + self.data['filename'], shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
     def extract_file_list(self):
-	f = open(self.data['filename'], 'r')
+    	f = open(self.data['filename'], 'r')
         data = f.readlines()
         for line in data:
             values = line.split('+++');
@@ -88,6 +90,12 @@ class Patch(object):
         res = res.rstrip();
         return res
 
+    def get_repo_name(self):
+        return self.repositories[0][repo_constants.NAME]
+
+    def get_repo_address(self):
+        return self.repositories[0][repo_constants.ADDRESS]
+
     def log_info(self):
         print ('========================')
         print ('Patch ID: ' + self.get_id())
@@ -98,6 +106,6 @@ class Patch(object):
         print ('Reposetories: ')
         if len(self.get_repositorys()) > 0:
             for r in self.get_repositorys():
-                print (r['rep_name'] +',' + str(r['priority']))
+                print (r['repo_name'] +',' + str(r['priority']))
         else:
             print ('no repository found')
