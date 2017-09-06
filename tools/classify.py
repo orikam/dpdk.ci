@@ -1,4 +1,6 @@
 import json
+import repo_constants
+
 
 class Classify(object):
 
@@ -25,23 +27,23 @@ class Classify(object):
                 for f in files:
                     if f.find(rule)>-1:
                         found = True
-                        # print("found rep based on file = " + rep['repo_name'])
+                        # print("found rep based on file = " + rep[repo_constants.NAME])
             if found:
                 obj = {};
-                obj['rep_name'] = rep['repo_name']
-                obj['repo_address'] = rep['repo_address']
-                obj['priority'] = rep['priority']
+                obj[repo_constants.NAME] = rep[repo_constants.NAME]
+                obj[repo_constants.ADDRESS] = rep[repo_constants.ADDRESS]
+                obj[repo_constants.PRIORITY] = rep[repo_constants.PRIORITY]
                 patch.set_repository(obj)
         found_repos = patch.get_repositorys();
         if (len(found_repos)==0):
             obj = {}
             rep  = self.rules['default']
-            obj['rep_name'] = rep['repo_name']
-            obj['repo_address'] = rep['repo_address']
-            obj['priority'] = rep['priority']
+            obj[repo_constants.NAME] = rep[repo_constants.NAME]
+            obj[repo_constants.ADDRESS] = rep[repo_constants.ADDRESS]
+            obj[repo_constants.PRIORITY] = rep[repo_constants.PRIORITY]
             patch.set_repository(obj)
             newlist = []
             newlist.append(obj)
         else:
-            newlist = sorted(patch.get_repositorys(), key=lambda x: x['priority'], reverse=False)
+            newlist = sorted(patch.get_repositorys(), key=lambda x: x[repo_constants.PRIORITY], reverse=False)
         patch.set_repository_list(newlist)
