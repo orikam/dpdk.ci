@@ -16,41 +16,22 @@ import os
 # for line in test:
 #     print line
 
-
-# debug gettign on patch info
-# patch = patch.Patch('269870')
-# res = patch.load_info()
-# if res == patch.PATCH_FOUND:
-#     patch.download()
-#     files = patch.get_files()
-#
-#     for name in files:
-#         print name
-#
-#     classifier = classify.Classify()
-#     classifier.classify(patch)
-
-# debug getting number of patchs
-# plist = patch_list.PatchList()
-# plist.pull_patch_list(26986,100)
-
-def check_patchs(base_dir, patchs):
-	for patch in patchs:
-    	# git_control.clone('https://github.com/jlowin/git-sync.git', '/labhome/orika/mtr/temp/cli_repos/debug')
-		git_control.reset(patch.get_repo_address(), os.path.join(base_dir,patch.get_repo_name()))
-		git_control.apply(os.path.join(base_dir,patch.get_repo_name()),patch.get_id())
+def check_patches(base_dir, patches):
+    for patch in patches:
+        # git_control.clone('https://github.com/jlowin/git-sync.git', '/labhome/orika/mtr/temp/cli_repos/debug')
+        git_control.reset(patch.get_repo_address(), os.path.join(base_dir,patch.get_repo_name()))
+        git_control.apply(os.path.join(base_dir,patch.get_repo_name()),patch.get_id())
 
 def main():
-	parser = argparse.ArgumentParser()
-	parser.add_argument("base_dir", type=str, help="the base folder for the repos")
-	parser.add_argument("start", type=int, help="the first patch id to get")
-	parser.add_argument("number", type=int, help="the number of patches to analyze")
-	args = parser.parse_args()
-	plist = patch_list.PatchList()
-	plist.pull_patch_list(args.start,args.number)
-	patchs = plist.get_patch_list()
-	print("number of patches = " + str(len(patchs)))
-	check_patchs(args.base_dir,patchs)
+    parser = argparse.ArgumentParser()
+    parser.add_argument("base_dir", type=str, help="the base folder for the repos")
+    parser.add_argument("start", type=int, help="the first patch id to get")
+    parser.add_argument("number", type=int, help="the number of patches to analyze")
+    args = parser.parse_args()
+    plist = patch_list.PatchList()
+    plist.pull_patch_list(args.start,args.number)
+    patches = plist.get_patch_list()
+    check_patches(args.base_dir,patches)
 
 
 if __name__ == "__main__":

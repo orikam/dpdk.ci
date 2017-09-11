@@ -58,7 +58,7 @@ class Patch(object):
         p = subprocess.Popen('rm ' + self.data['filename'], shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
     def extract_file_list(self):
-    	f = open(self.data['filename'], 'r')
+        f = open(self.data['filename'], 'r')
         data = f.readlines()
         for line in data:
             values = line.split('+++');
